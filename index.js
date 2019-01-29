@@ -1,11 +1,13 @@
 const express = require('express');
+const handlebars = require('express-handlebars'); 
 
-const app = express(); 
+const app = express();
 
-app.get('/', (request, response) =>{
-response.send('hello world');
+app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+app.get('/', (request, response) => {
+    response.render('second');
 });
-app.get("/sida2",(request, response) =>{
-    response.send('sida2')
-});
-app.listen(1111, () => console.log('application running on port 1111/sida2'));
+
+app.listen(1111, () => console.log('application running on port 1111'));
