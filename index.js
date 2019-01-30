@@ -3,6 +3,8 @@ const handlebars = require('express-handlebars');
 
 const app = express();
 
+app.use('/static' , express.static('public'));
+
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
