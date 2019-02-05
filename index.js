@@ -8,11 +8,15 @@ app.use('/static' , express.static('public'));
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.get('/registrera', (request, response) => {
+response.render('registrera')
+});
+
 app.get('/', (request, response) => {
     response.render('home');
 });
 
-app.get('/', (request, response) => {
+app.get('/sida2', (request, response) => {
     response.render('second');
 });
 
