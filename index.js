@@ -8,6 +8,14 @@ app.use('/static' , express.static('public'));
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.get('/skapaobjekt', (request, response) => {
+    response.render('skapaobjekt')
+    });
+
+app.get('/loggin', (request, response) => {
+    response.render('loggin')
+    });
+
 app.get('/registrera', (request, response) => {
 response.render('registrera')
 });

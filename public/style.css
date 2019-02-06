@@ -44,11 +44,6 @@ margin: 0 auto;
     color: black;
   }
   
-  .header a.active {
-    background-color: dodgerblue;
-    color: white;
-  }
-  
   .header-right {
     float: right;
   }
@@ -88,3 +83,24 @@ padding: 20px;
 width: 340px; 
 
   }
+
+  .loggin {
+  border: solid white 2px;
+       height: 400px;
+       width: 400px;
+       margin:0 auto; 
+    padding: 20px;
+   
+text-align: center
+  }
+.logginsida{
+width: 100%;
+height: 100%;
+background-image: url ("blå.jpg");
+}
+
+body {
+
+background: url('/static/pictures/blå.jpg');
+
+}
