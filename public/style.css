@@ -8,10 +8,12 @@ margin: 0 auto;
 }
 
 .box {
-    width: 300px;
+  display: inline-block; 
+    width: 23%;
     border: 7px solid black;
-    padding: 0px;
-    margin: 25px;
+    padding: 30px;
+    float: left; 
+    margin: 1%;
     height: 350px;
     display: inline-block;
   }
@@ -96,11 +98,13 @@ text-align: center
 .logginsida{
 width: 100%;
 height: 100%;
-background-image: url ("blå.jpg");
+background-image: url ("portfolio.jpg");
 }
 
 body {
 
-background: url('/static/pictures/blå.jpg');
+background: url('/static/pictures/portfolio.jpg');
+background-size: cover;
+background-repeat: no-repeat;
 
 }
