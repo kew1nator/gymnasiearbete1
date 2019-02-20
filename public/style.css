@@ -1,39 +1,49 @@
 p {
-    color: red;
-}
+  color: solid black;
+} 
 
 .site {
-width: 1300px ;
-margin: 0 auto;
+  width: 1300px ;
+  margin: 0 auto;
+  }
+
+.jamal {
+
+display: flex; 
+flex-wrap: wrap;
+justify-content : space-around;
+
+  
 }
 
 .box {
-  display: inline-block; 
-    width: 23%;
+    width: 350px;
     border: 7px solid black;
-    padding: 30px;
-    float: left; 
-    margin: 1%;
     height: 350px;
-    display: inline-block;
-  }
-
+    margin-bottom: 50px;
+}
 
   .header {
     overflow: hidden;
-    background-color: #ffffff6e;
-    padding: 20px 10px;
+    background-color:  rgba(255, 255, 255, 0.20) ;
+    padding: 20px 10px; 
+   height: 20px;
+   width: 10 px; 
   }
   
   .header a {
     float: left;
-    color: black;
+    color: white;
     text-align: center;
     padding: 12px;
     text-decoration: none;
     font-size: 18px; 
     line-height: 25px;
     border-radius: 4px;
+
+
+
+    
   }
   
   .header a.logo {
@@ -64,17 +74,19 @@ margin: 0 auto;
 
   .bild {
 width: 100%;
+height: 100% ;
 
   }
 
   .bild1 {
+ width: 100%;
+height: 100% ;
 
-    width: 100%;
   }
 
   .kontakt {
-border: solid black 2px;
-height: 400px;
+border: solid white 4px;
+height: 420px;
 width: 400px;
 margin:0 auto;
 padding: 20px;
@@ -86,8 +98,17 @@ width: 340px;
 
   }
 
+.skapaobjekt {
+  border: solid white 4px;
+  height: 400px;
+  width: 400px;
+  margin:0 auto; 
+padding: 20px;
+
+}
+
   .loggin {
-  border: solid white 2px;
+  border: solid white 4px;
        height: 400px;
        width: 400px;
        margin:0 auto; 
@@ -107,4 +128,10 @@ background: url('/static/pictures/321.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 
+}
+
+.login_text{
+  float: left;
+  padding: 0 0 0 26px;
+  margin: 0 auto;
 }
