@@ -134,4 +134,15 @@ background-repeat: no-repeat;
   float: left;
   padding: 0 0 0 26px;
   margin: 0 auto;
+} 
+
+.admin{
+  border: solid white 4px;
+  height: 400px;
+  width: 400px;
+  margin:0 auto; 
+padding: 20px;
+
+text-align: center 
+
 }
