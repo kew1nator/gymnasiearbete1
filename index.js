@@ -25,7 +25,7 @@ app.post('/portfolio/create', async (request, response) => {
     });
 
     app.get('/registrera', (request, response) => {
-        response.render('registrera')
+        response.render('registrera', {layout: "cp"});
         });
 
         app.post('/portfolio/registrera', async (request, response) => {
@@ -41,24 +41,29 @@ app.post('/portfolio/create', async (request, response) => {
         response.sendstatus(204); 
         }); 
 
-app.get('/skapaobjekt', (request, response) => {
-    response.render('skapaobjekt')
+app.get('/controlpanel/skapaobjekt', (request, response) => {
+    response.render('skapaobjekt', {layout: "cp"});
     });
 
-app.get('/loggin', (request, response) => {
-    response.render('loggin')
+app.get('/controlpanel/loggin', (request, response) => {
+    response.render('loggin', {layout: "cp"});
     });
+
 
 app.get('/', (request, response) => {
     response.render('home');
 });
 
-app.get('/sida2', (request, response) => {
-    response.render('second');
+app.get('/controlpanel/admin', (request, response) => {
+    response.render('admin' , {layout: "cp"});
 });
 
-app.get('/admin', (request, response) => {
-    response.render('admin');
+app.get('/ommig', (request, response) => {
+    response.render('ommig');
+});
+
+app.get('/controlpanel', (request, response) => {
+    response.render('controlpanel', {layout: "cp"});
 });
 
 
