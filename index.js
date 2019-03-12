@@ -10,6 +10,18 @@ app.use('/static' , express.static('public'));
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.post('/controlpanel/loggin', async (request, response) => {
+const db = await connect();
+const collection = db.collection("users");
+const login = await collection.find({losenord: request.body.losenord, UserName: request.body.UserName}).toArray();
+if (login.length < 1 ) {
+response.set('Set-Cookie', 'admin=true;');
+response.redirect("/controlpanel");
+}
+})
+
+
+
 app.post('/portfolio/create', async (request, response) => {
     console.log('body', request.body)
     const skapaobjekt = {
@@ -24,26 +36,42 @@ app.post('/portfolio/create', async (request, response) => {
     response.sendstatus(204); 
     });
 
-    app.get('/registrera', (request, response) => {
+    app.get('/controlpanel/registrera', (request, response) => {
         response.render('registrera', {layout: "cp"});
+        response.set()
+        console.log('request.headers.cookie', request.headers.cookie);
+        console.log('request.cookies', request.cookies);
         });
 
         app.post('/portfolio/registrera', async (request, response) => {
             const registrera = {
-                förnamn: request.body.fnamn,
-                efternamn: request.body.enamn,
+                UserName: request.body.UserName,
                 epostadress: request.body.epost ,
+                losenord: request.body.losenord ,
             }; 
     
         const db = await connect();
-        const collection = db.collection('användare');
+        const collection = await db.collection('användare');
         await collection.insertOne(registrera);
-        response.sendstatus(204); 
+        response.redirect("/controlpanel/loggin");
         }); 
 
 app.get('/controlpanel/skapaobjekt', (request, response) => {
     response.render('skapaobjekt', {layout: "cp"});
     });
+
+    app.post('/controlpanel/skapaobjekt', async (request, response) => {
+        const skapaobjekt = {laddaupplank: request.body.laddaupplank,
+            laddauppbild: request.body.laddauppbild,};
+        response.render('skapaobjekt', {layout: "cp"});
+        response.redirect("/controlpanel/skapaobjekt");
+        });
+
+const db = await connect();
+const collection = db.collection('skapaobjekt');
+await collection.insertOne(skapaobjekt);
+response.redirect("/controlpanel/skapaobjekt");
+}); 
 
 app.get('/controlpanel/loggin', (request, response) => {
     response.render('loggin', {layout: "cp"});

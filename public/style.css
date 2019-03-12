@@ -8,14 +8,10 @@ p {
   }
 
 .jamal {
-
 display: flex; 
 flex-wrap: wrap;
 justify-content : space-around;
-
-  
 }
-
 
 .box {
     width: 350px;
@@ -24,7 +20,6 @@ justify-content : space-around;
     height: 350px;
     margin-bottom: 50px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
 }
 
   .header {
@@ -32,10 +27,9 @@ justify-content : space-around;
     padding: 20px 10px;
     width: 100%;
     height: 40px;
- 
   }
-  .header-cp {
 
+  .header-cp {
     background-color: black;
     padding: 20px 10px;
     width: 100%;
@@ -43,6 +37,7 @@ justify-content : space-around;
     z-index: 1000;
     height: 54px;
     }
+
   .maincp{
 display: inline-block;
 float: right;
@@ -63,7 +58,7 @@ height: 100%;
     line-height: 50px;
     text-decoration: none;
     }
-  
+
   .header a {
     float: left;
     color: white;
@@ -74,7 +69,7 @@ height: 100%;
     line-height: 25px;
     border-radius: 4px;
   }
-  
+
   .sidenav {
     display: inline-block;
     height: 675px;
@@ -83,15 +78,12 @@ height: 100%;
     padding-top: 20px;
     position: fixed;
     margin-top: 80px;
-  
   }
-  
-  
   
   .sidenav a:hover {
     color: #f1f1f1;
   }
-  
+
   .main {
     margin-left: 160px; /* Same as the width of the sidenav */
     font-size: 28px; /* Increased text to enable scrolling */
@@ -102,23 +94,24 @@ height: 100%;
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
   .maincp  {
     display: inline-block;
     float: right;
     width: 1300px;
     height: 100%;
   }
-  
+
   .header a.logo {
     font-size: 25px;
     font-weight: bold;
   }
-  
+
   .header a:hover {
     background-color: #ddd;
     color: black;
   }
-  
+
   .header-right {
     float: right;
   }
@@ -129,56 +122,53 @@ height: 100%;
       display: block;
       text-align: left;
     }
-    
+
     .header-right {
       float: none;
     }
+
   }
 
   .bild {
 width: 100%;
 height: 100% ;
-
   }
 
   .bild1 {
  width: 100%;
 height: 100% ;
-
   }
 
   .kontakt {
 border: solid white 4px;
 height: 420px;
 width: 400px;
-margin:0 auto;
+margin: 120px auto;
 padding: 20px;
     text-align: center
   }
 
   .input {
 width: 340px; 
-
   }
 
 .skapaobjekt {
   border: solid white 4px;
   height: 400px;
   width: 400px;
-  margin:0 auto; 
+  margin: 120px auto; 
 padding: 20px;
-
 }
 
   .loggin {
   border: solid white 4px;
        height: 400px;
        width: 400px;
-       margin:0 auto; 
-    padding: 20px;
-   
+       margin: 120px auto; 
+    padding: 20px; 
 text-align: center
   }
+
 .logginsida{
 width: 100%;
 height: 100%;
@@ -186,11 +176,11 @@ background-image: url ("./pictures/grå.jpg");
 }
 
 body {
-
 background: url('./pictures/grå.jpg');
 background-size: cover;
 background-repeat: no-repeat;
 color: white;
+margin: 0 auto;
 }
 
 .login_text{
@@ -198,24 +188,23 @@ color: white;
   padding: 0 0 0 26px;
   margin: 0 auto;
 } 
+
 .btn {
-background: url(./pictures/login.png) no-repeat;
+background: url('./pictures/login.png') no-repeat;
 background-size: 100% 100%;
 height: 40px;
 width: 150px;
 border: none;
 margin: 20px;
-
 }
+
 .admin{
   border: solid white 4px;
   height: 400px;
   width: 400px;
   margin:0 auto; 
 padding: 20px;
-
 text-align: center 
-
 }
 
 .ommmig{
@@ -224,9 +213,7 @@ text-align: center
   width: 400px;
   margin:0 auto; 
 padding: 20px;
-
 text-align: center;
-
 }
 
 .text{
@@ -234,6 +221,5 @@ font-size: 40px;
 color: white;
 text-align: left;
 text-decoration: none;
-
 
 }
