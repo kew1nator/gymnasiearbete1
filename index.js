@@ -32,8 +32,8 @@ app.post('/portfolio/create', async (request, response) => {
 
     const db = await connect();
     const collection = db.collection('registrera');
-    await collection.insertOne(registrera);
-    response.sendstatus(204); 
+    await collection.insertOne(skapaobjekt);
+    response.sendStatus(204); 
     });
 
     app.get('/controlpanel/registrera', (request, response) => {
@@ -63,15 +63,13 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
     app.post('/controlpanel/skapaobjekt', async (request, response) => {
         const skapaobjekt = {laddaupplank: request.body.laddaupplank,
             laddauppbild: request.body.laddauppbild,};
-        response.render('skapaobjekt', {layout: "cp"});
-        response.redirect("/controlpanel/skapaobjekt");
+            const db = await connect();
+            const collection = db.collection('skapaobjekt');
+            await collection.insertOne(skapaobjekt);
+            response.redirect("/controlpanel/skapaobjekt");
         });
 
-const db = await connect();
-const collection = db.collection('skapaobjekt');
-await collection.insertOne(skapaobjekt);
-response.redirect("/controlpanel/skapaobjekt");
-}); 
+
 
 app.get('/controlpanel/loggin', (request, response) => {
     response.render('loggin', {layout: "cp"});
@@ -94,7 +92,19 @@ app.get('/controlpanel', (request, response) => {
     response.render('controlpanel', {layout: "cp"});
 });
 
+app.get('/controlpanel/visaobjekt', (request, response) => {
+    response.render('controlpanel', {layout: "cp"});
+});
 
+app.get('/controlpanel/listaobjekt', async (request, response) => {
+        const db = await connect();
+        const collection = db.collection('listaobjekt');
+       const listaobjekt= await collection.find().toArray();
+       response.render('listaobjekt' , {
+        objekt: listaobjekt,
+       });
+      
+    });
 
-
+  
 app.listen(1111, () => console.log('application running on port 1111'));
