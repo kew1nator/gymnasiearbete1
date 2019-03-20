@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const connect = require('./models/connect');
 app.use(bodyParser.urlencoded());
+const ObjectId = require('mongodb').ObjectId;
 
 app.use('/static' , express.static('public'));
 
@@ -29,9 +30,8 @@ app.post('/portfolio/create', async (request, response) => {
         länknamn: request.body.länk,
     }; 
 
-
     const db = await connect();
-    const collection = db.collection('registrera');
+    const collection = db.collection('skapaobjekt');
     await collection.insertOne(skapaobjekt);
     response.sendStatus(204); 
     });
@@ -61,6 +61,7 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
     });
 
     app.post('/controlpanel/skapaobjekt', async (request, response) => {
+        console.log(request.body);
         const skapaobjekt = {laddaupplank: request.body.laddaupplank,
             laddauppbild: request.body.laddauppbild,};
             const db = await connect();
@@ -93,12 +94,24 @@ app.get('/controlpanel', (request, response) => {
 });
 
 app.get('/controlpanel/visaobjekt', (request, response) => {
-    response.render('controlpanel', {layout: "cp"});
+    response.render('visaobjekt', {layout: "cp"});
+});
+
+app.get('/visaobjekt/:id', async (request, response) => {
+
+const id = request.params.id;
+const db = await connect();
+const collection = db.collection("skapaobjekt");
+const skapaobjekt = await collection.find({_id: ObjectId(id)}).toArray();
+console.log(skapaobjekt);
+response.render('visaobjekt' , {
+   objekt: skapaobjekt[0]
+})
 });
 
 app.get('/controlpanel/listaobjekt', async (request, response) => {
         const db = await connect();
-        const collection = db.collection('listaobjekt');
+        const collection = db.collection('skapaobjekt');
        const listaobjekt= await collection.find().toArray();
        response.render('listaobjekt' , {
         objekt: listaobjekt,
