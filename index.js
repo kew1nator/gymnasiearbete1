@@ -19,10 +19,22 @@ if (login.length < 1 ) {
 response.set('Set-Cookie', 'admin=true;');
 response.redirect("/controlpanel");
 }
-})
+});
 
-
-
+app.post('/controlpanel/visaobjekt/edit/:_id', async (request,  response) => {
+    const edit = request.params.id; 
+    const db = await connect();
+    const collection = db.collection('skapaobjekt');
+    await collection.findOneAndUpdate({ _id: ObjectId(edit)}, 
+        { $set: {
+            bildnamn: request.body.bild,
+            länknamn: request.body.länk,  
+            }
+         } 
+    );
+    response.redirect("/controlpanel/listaobjekt");
+        });
+        
 app.post('/portfolio/create', async (request, response) => {
     console.log('body', request.body)
     const skapaobjekt = {
@@ -85,6 +97,25 @@ app.get('/controlpanel/admin', (request, response) => {
     response.render('admin' , {layout: "cp"});
 });
 
+
+app.get('/controlpanel/visaobjekt/tabort/:id', async (request, response) => {
+    const tabort = request.params.id; 
+    const db = await connect();
+    const collection = db.collection('listaobjekt');
+    await collection.findOneAndDelete({_id: ObjectId(tabort) });
+    response.redirect("/controlpanel/listaobjekt");
+});
+
+app.get('/controlpanel/visaobjekt/edit/:id', async (request, response) => {
+    const edit = request.params.id; 
+    const db = await connect();
+    const collection = db.collection('skapaobjekt');
+    const skapaobjekt = await collection.find({_id: ObjectId(edit)}).toArray();
+    console.log(skapaobjekt);
+    response.render('edit', {layout: "cp", skapaobjekt: skapaobjekt[0]});
+});
+
+
 app.get('/ommig', (request, response) => {
     response.render('ommig');
 });
@@ -93,11 +124,17 @@ app.get('/controlpanel', (request, response) => {
     response.render('controlpanel', {layout: "cp"});
 });
 
+
 app.get('/controlpanel/visaobjekt', (request, response) => {
     response.render('visaobjekt', {layout: "cp"});
 });
 
-app.get('/visaobjekt/:id', async (request, response) => {
+app.get('/controlpanel/edit', (request, response) => {
+    response.render('edit', {layout: "cp"});
+});
+
+
+app.get('/controlpanel/visaobjekt/:id', async (request, response) => {
 
 const id = request.params.id;
 const db = await connect();
@@ -112,7 +149,7 @@ response.render('visaobjekt' , {
 app.get('/controlpanel/listaobjekt', async (request, response) => {
         const db = await connect();
         const collection = db.collection('skapaobjekt');
-       const listaobjekt= await collection.find().toArray();
+       const listaobjekt = await collection.find().toArray();
        response.render('listaobjekt' , {
         objekt: listaobjekt,
        });

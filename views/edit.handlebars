@@ -1,0 +1,20 @@
+
+<div class= "objekt">
+<div class ="skapaobjekt">
+<p>skapa objekt</p>
+<form id="form" name="form" method="post" action="/controlpanel/visaobjekt/edit/{{skapaobjekt._id}}"> 
+ladda upp bilder
+<input class = "input" type="file" value="{{skapaobjekt.bildnamn}}" name="bild" id="bild" /> <br />
+
+ladda upp länkar:<br />
+<input class = "input" type="links" value="{{skapaobjekt.länknamn}}" name="länk" id="länk" /> <br />
+
+<input type="submit" name="skicka" id="skicka" value="skapa objekt" />
+
+<br />
+</div>
+
+
+
+</form>
+</div>
