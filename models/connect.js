@@ -1,6 +1,6 @@
 const mongodb = require('mongodb').MongoClient;
 
-const DB_NAME = 'mydb' ; 
+const DB_NAME = 'portfolio' ; 
 
 const MONGO_URL = `mongodb://localhost:27017/${DB_NAME}?authSource=admin`
 

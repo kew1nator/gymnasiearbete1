@@ -5,7 +5,7 @@ const app = express();
 const connect = require('./models/connect');
 app.use(bodyParser.urlencoded());
 const ObjectId = require('mongodb').ObjectId;
-
+const formidable = require('formidable');
 app.use('/static' , express.static('public'));
 
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
@@ -41,6 +41,8 @@ app.post('/portfolio/create', async (request, response) => {
         bildnamn: request.body.bild,
         länknamn: request.body.länk,
     }; 
+    
+
 
     const db = await connect();
     const collection = db.collection('skapaobjekt');
@@ -89,8 +91,25 @@ app.get('/controlpanel/loggin', (request, response) => {
     });
 
 
-app.get('/', (request, response) => {
-    response.render('home');
+app.get('/', async(request, response) => {
+const form = new formidable.IncomingForm();
+form.uploadDir = './public/images';
+form.keepExtensions = true; 
+form.parse(request, function(err, fields, files) {
+
+    if (err) {
+console.log(err.message);
+return;
+    }
+    console.log(files);
+});
+
+const db = await connect();
+const collection = db.collection('skapaobjekt');
+const objekt = await collection.find().toArray();
+    response.render('home',{
+        objekt:objekt
+    });
 });
 
 app.get('/controlpanel/admin', (request, response) => {

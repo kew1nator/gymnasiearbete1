@@ -1,28 +1,11 @@
 {{> menu }}
 <div class="site">
     <div class ="jamal">
-<div class="box">
-<a href="https://github.com/kew1nator/memory"><img class="bild" src  ="/static/pictures/memory.png"></a>
-</div> 
+{{#each objekt}}
 
 <div class="box">
-<a href="https://playsnake.org/"><img class="bild1" src  ="/static/pictures/snake1.png"></a>
-</div> 
-
-<div class="box">
-<a href="https://github.com/kew1nator/chat"><img class="bild" src  ="/static/pictures/chat.png"></a>
+<a href="{{länknamn}}"><img class="bild" src  ="/static/pictures/{{bildnamn}} "></a>
 </div>
-
-<div class="box">
-<a href="https://github.com/kew1nator/21-savage-"><img class="bild" src  ="/static/pictures/21 savage.jpg"></a>
-</div>
-
-<div class="box">
-<a href="https://github.com/kew1nator/gymnasiearbete1"><img class="bild" src  ="/static/pictures/gy-arbete (1).jpg"></a>
-</div>
-
-<div class="box">
-<img class="bild" src  ="/static/pictures/paper.jpg">
-</div>
+{{/each}}
 </div>
 </div>

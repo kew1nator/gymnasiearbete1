@@ -45,19 +45,23 @@ width: 1300px;
 height: 100%;
   }
 
-  .sidenav-btn{
+  .layout-btn{
     display: block;
       width: 160px;
       height: auto;
-      border: 2px solid black;
+      border: 2px solid white;
       margin: 6px auto;
-    background: #4CAF50;
+    background: red ;
     color: white;
     font-size: 20px;
     text-align: center;
     line-height: 50px;
     text-decoration: none;
     }
+
+  .layout-bt a:hover {
+    color: rgb(1, 0, 0);
+  }
 
   .header a {
     float: left;
@@ -70,7 +74,7 @@ height: 100%;
     border-radius: 4px;
   }
 
-  .sidenav {
+  .layout {
     display: inline-block;
     height: 675px;
     width: 180px;
@@ -80,7 +84,7 @@ height: 100%;
     margin-top: 80px;
   }
   
-  .sidenav a:hover {
+  .layout a:hover {
     color: #f1f1f1;
   }
 
