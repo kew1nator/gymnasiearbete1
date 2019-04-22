@@ -1,13 +1,19 @@
 <div class= "objekt">
 <div class ="skapaobjekt">
 <p>skapa objekt</p>
-<form id="form" name="form" method="post" action="/portfolio/create"enctype ="multipart/form-data"> 
-ladda upp bilder
-<input class = "input" type="file" name="bild" id="bild" /> <br />
 
+<form id="form" name="form" method="post" action="/portfolio/create" enctype="multipart/form-data"> 
+title <br />
+<textarea name="title1"></textarea> 
 ladda upp länkar:<br />
 <input class = "input" type="links" name="länk" id="länk" /> <br />
+text : <br />
+<textarea name="content"></textarea> 
+<br />
+ladda upp bilder <br />
+<input class = "input" type="file" name="bild" id="bild" /> <br />
 
+<br />
 <input type="submit" name="skicka" id="skicka" value="skapa objekt" />
 
 <br />

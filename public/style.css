@@ -89,8 +89,8 @@ height: 100%;
   }
 
   .main {
-    margin-left: 160px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
+    margin-left: 160px; 
+    font-size: 28px; 
     padding: 0px 10px;
   }
   
@@ -238,4 +238,22 @@ text-decoration: none;
 text-decoration: none; 
 color: black
 
+}
+
+.portfolio{
+  border: solid white 4px;
+  height: 400px;
+  width: 400px;
+  margin:0 auto; 
+padding: 20px;
+text-align: center;
+}
+
+.chat1{
+  border: solid white 4px;
+  height: 400px;
+  width: 400px;
+  margin:0 auto; 
+padding: 20px;
+text-align: center;
 }

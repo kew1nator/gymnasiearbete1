@@ -6,6 +6,16 @@ const connect = require('./models/connect');
 app.use(bodyParser.urlencoded());
 const ObjectId = require('mongodb').ObjectId;
 const formidable = require('formidable');
+var multer = require('multer')
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/images')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '.jpg') //Appending .jpg
+    }
+  })
+var upload = multer({ storage: storage })
 app.use('/static' , express.static('public'));
 
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
@@ -35,15 +45,15 @@ app.post('/controlpanel/visaobjekt/edit/:_id', async (request,  response) => {
     response.redirect("/controlpanel/listaobjekt");
         });
         
-app.post('/portfolio/create', async (request, response) => {
-    console.log('body', request.body)
+app.post('/portfolio/create', upload.single('bild'), async  (request, response) => {
+
     const skapaobjekt = {
-        bildnamn: request.body.bild,
+        title1: request.file.title1,
+        bildnamn: request.file.filename,
         länknamn: request.body.länk,
+        content: request.body.content, 
     }; 
-    
-
-
+    console.log(request.body);
     const db = await connect();
     const collection = db.collection('skapaobjekt');
     await collection.insertOne(skapaobjekt);
@@ -76,8 +86,12 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
 
     app.post('/controlpanel/skapaobjekt', async (request, response) => {
         console.log(request.body);
-        const skapaobjekt = {laddaupplank: request.body.laddaupplank,
-            laddauppbild: request.body.laddauppbild,};
+        const skapaobjekt = {
+        title1: request.body.title1,
+            laddaupplank: request.body.laddaupplank,
+            laddauppbild: request.body.laddauppbild,
+            content: request.body.content
+        };
             const db = await connect();
             const collection = db.collection('skapaobjekt');
             await collection.insertOne(skapaobjekt);
@@ -92,18 +106,6 @@ app.get('/controlpanel/loggin', (request, response) => {
 
 
 app.get('/', async(request, response) => {
-const form = new formidable.IncomingForm();
-form.uploadDir = './public/images';
-form.keepExtensions = true; 
-form.parse(request, function(err, fields, files) {
-
-    if (err) {
-console.log(err.message);
-return;
-    }
-    console.log(files);
-});
-
 const db = await connect();
 const collection = db.collection('skapaobjekt');
 const objekt = await collection.find().toArray();
@@ -142,6 +144,25 @@ app.get('/ommig', (request, response) => {
 app.get('/controlpanel', (request, response) => {
     response.render('controlpanel', {layout: "cp"});
 });
+
+app.get('/portfolio/visa/:id', async (request, response) => {
+    const id = request.params.id;
+    const db = await connect();
+    const collection = db.collection ("skapaobjekt");
+    const visaportfolio = await collection.find({_id: ObjectId(id)}).toArray();
+ 
+    response.render('visaportfolio',{objekt:visaportfolio});
+});
+
+app.get('/portfolio/visa/chat1/:id', async (request, response) => {
+    const id = request.params.id;
+    const db = await connect();
+    const collection = db.collection ("skapaobjekt");
+    const chat1 = await collection.find({_id: ObjectId(id)}).toArray();
+ 
+    response.render('chat1',{objekt:chat1});
+});
+
 
 
 app.get('/controlpanel/visaobjekt', (request, response) => {
