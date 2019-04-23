@@ -71,8 +71,9 @@ app.post('/portfolio/create', upload.single('bild'), async  (request, response) 
             const registrera = {
                 UserName: request.body.UserName,
                 epostadress: request.body.epost ,
-                losenord: request.body.losenord ,
+                losenord: request.body.losenord,
             }; 
+
     
         const db = await connect();
         const collection = await db.collection('användare');
@@ -100,9 +101,30 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
 
 
 
-app.get('/controlpanel/loggin', (request, response) => {
-    response.render('loggin', {layout: "cp"});
+    app.post('/portfolio/loggin', async (request, response) => {
+        const id = request.params.id; 
+        const db = await connect();
+        const collection = await db.collection('användare');
+
+        const loggin = await collection.find({epostadress: request.body.epostadress}).toArray();
+
+if (loggin[0].losenord === request.body.losenord ) {
+    response.set('Set-Cookie', 'password=true;');
+    response.redirect("/controlpanel/skapaobjekt");
+    } else {
+        response.render('loggin', {layout:  "cp", meddelande: 'fel lösenord'});
+    }
+   
     });
+    
+    app.get('/controlpanel/loggin', (request, response) => {
+        response.render('loggin', {layout: "cp"});
+        response.set()
+        console.log('request.headers.cookie', request.headers.cookie);
+        console.log('request.cookies', request.cookies);
+        });
+
+       
 
 
 app.get('/', async(request, response) => {
@@ -153,16 +175,6 @@ app.get('/portfolio/visa/:id', async (request, response) => {
  
     response.render('visaportfolio',{objekt:visaportfolio});
 });
-
-app.get('/portfolio/visa/chat1/:id', async (request, response) => {
-    const id = request.params.id;
-    const db = await connect();
-    const collection = db.collection ("skapaobjekt");
-    const chat1 = await collection.find({_id: ObjectId(id)}).toArray();
- 
-    response.render('chat1',{objekt:chat1});
-});
-
 
 
 app.get('/controlpanel/visaobjekt', (request, response) => {
