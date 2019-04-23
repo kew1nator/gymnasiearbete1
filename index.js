@@ -48,7 +48,7 @@ app.post('/controlpanel/visaobjekt/edit/:_id', async (request,  response) => {
 app.post('/portfolio/create', upload.single('bild'), async  (request, response) => {
 
     const skapaobjekt = {
-        title1: request.file.title1,
+        title1: request.body.title1,
         bildnamn: request.file.filename,
         länknamn: request.body.länk,
         content: request.body.content, 
@@ -87,7 +87,7 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
     app.post('/controlpanel/skapaobjekt', async (request, response) => {
         console.log(request.body);
         const skapaobjekt = {
-        title1: request.body.title1,
+            title1: request.body.title1,
             laddaupplank: request.body.laddaupplank,
             laddauppbild: request.body.laddauppbild,
             content: request.body.content
