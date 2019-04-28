@@ -21,7 +21,7 @@ app.use('/static' , express.static('public'));
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-app.post('/controlpanel/loggin', async (request, response) => {
+app.post('/home/loggin', async (request, response) => {
 const db = await connect();
 const collection = db.collection("users");
 const login = await collection.find({losenord: request.body.losenord, UserName: request.body.UserName}).toArray();
@@ -63,11 +63,9 @@ app.post('/portfolio/create', upload.single('bild'), async  (request, response) 
     app.get('/controlpanel/registrera', (request, response) => {
         response.render('registrera', {layout: "cp"});
         response.set()
-        console.log('request.headers.cookie', request.headers.cookie);
-        console.log('request.cookies', request.cookies);
         });
 
-        app.post('/portfolio/registrera', async (request, response) => {
+        app.post('/controlpanel/registrera', async (request, response) => {
             const registrera = {
                 UserName: request.body.UserName,
                 epostadress: request.body.epost ,
@@ -78,7 +76,7 @@ app.post('/portfolio/create', upload.single('bild'), async  (request, response) 
         const db = await connect();
         const collection = await db.collection('användare');
         await collection.insertOne(registrera);
-        response.redirect("/controlpanel/loggin");
+        response.redirect("/controlpanel");
         }); 
 
 app.get('/controlpanel/skapaobjekt', (request, response) => {
@@ -101,7 +99,7 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
 
 
 
-    app.post('/portfolio/loggin', async (request, response) => {
+    app.post('/home/loggin', async (request, response) => {
         const id = request.params.id; 
         const db = await connect();
         const collection = await db.collection('användare');
@@ -110,18 +108,16 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
 
 if (loggin[0].losenord === request.body.losenord ) {
     response.set('Set-Cookie', 'password=true;');
-    response.redirect("/controlpanel/skapaobjekt");
+    response.redirect("/controlpanel/");
     } else {
-        response.render('loggin', {layout:  "cp", meddelande: 'fel lösenord'});
+        response.render('/home/loggin', {layout:  "main", meddelande: 'fel lösenord'});
     }
    
     });
     
-    app.get('/controlpanel/loggin', (request, response) => {
-        response.render('loggin', {layout: "cp"});
+    app.get('/home/loggin', (request, response) => {
+        response.render('loggin', {layout: "main"});
         response.set()
-        console.log('request.headers.cookie', request.headers.cookie);
-        console.log('request.cookies', request.cookies);
         });
 
        
@@ -144,7 +140,7 @@ app.get('/controlpanel/admin', (request, response) => {
 app.get('/controlpanel/visaobjekt/tabort/:id', async (request, response) => {
     const tabort = request.params.id; 
     const db = await connect();
-    const collection = db.collection('listaobjekt');
+    const collection = db.collection('skapaobjekt');
     await collection.findOneAndDelete({_id: ObjectId(tabort) });
     response.redirect("/controlpanel/listaobjekt");
 });
