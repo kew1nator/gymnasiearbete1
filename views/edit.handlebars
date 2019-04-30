@@ -1,17 +1,19 @@
 
 <div class= "objekt">
-<div class ="skapaobjekt">
-<p>skapa objekt</p>
+<div class ="skapaobjekt container-box-second top-margin">
+    
+<h1>Editera objekt</h1>
 <form id="form" name="form" method="post" action="/controlpanel/visaobjekt/edit/{{skapaobjekt._id}}"> 
-ladda upp bilder
-<input class = "input" type="file" value="{{skapaobjekt.bildnamn}}" name="bild" id="bild" /> <br />
+<div class="column">
+Ladda upp bilder
+<input type="file" value="{{skapaobjekt.bildnamn}}" name="bild" id="bild" /> <br />
 
-ladda upp länkar:<br />
+Ladda upp länkar:<br />
 <input class = "input" type="links" value="{{skapaobjekt.länknamn}}" name="länk" id="länk" /> <br />
 
-<input type="submit" name="skicka" id="skicka" value="skapa objekt" />
+<input class="submitbtn" type="submit" name="skicka" id="skicka" value="Skapa objekt" />
 
-<br />
+</div>
 </div>
 
 

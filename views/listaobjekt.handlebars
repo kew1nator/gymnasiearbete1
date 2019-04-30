@@ -1,10 +1,12 @@
-<div class = "listaobjekt">
-<h3> klara objekt </h3>
+<div class = "listaobjekt container-box-second auto-height big">
+<h1> Klara objekt </h1>
 {{#each objekt}}
-<article>
-<h2>{{title}}</h2>
-<p>klara objekt: <span class="primary">{{_id}}</span></p>
-<p>{{bildnamn}}.. <a class="div-button" href="/controlpanel/visaobjekt/{{_id}}">visa objekt !</a></p>
+<article class="column">
+<h2>{{title1}}</h2>
+<p>Bild: {{bildnamn}}.. </p>
+<p>Beskrivning {{content}}</p>
+<p>Länknamn {{länknamn}}</p>
+<a class="submitbtn" href="/controlpanel/visaobjekt/{{_id}}">Visa objekt !</a>
 </article>
 {{/each}}
 </div>

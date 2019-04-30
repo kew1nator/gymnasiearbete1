@@ -5,6 +5,7 @@ p {
 .site {
   width: 1300px ;
   margin: 0 auto;
+  
   }
 
 .startsida {
@@ -23,19 +24,23 @@ justify-content : space-around;
 }
 
   .header {
-    background-color: black;
+    background-color: white;
     padding: 20px 10px;
     width: 100%;
     height: 40px;
+    display: flex;
+    align-items: center;
   }
 
   .header-cp {
-    background-color: black;
+    background-color:white;
     padding: 20px 10px;
     width: 100%;
     position: fixed;
     z-index: 1000;
     height: 54px;
+    display: flex;
+    align-items: center;
     }
 
   .maincp{
@@ -47,16 +52,16 @@ height: 100%;
 
   .layout-btn{
     display: block;
-      width: 160px;
-      height: auto;
+     padding: 7px;
       border: 2px solid white;
       margin: 6px auto;
-    background: red ;
+    background: midnightblue ;
     color: white;
     font-size: 20px;
     text-align: center;
     line-height: 50px;
     text-decoration: none;
+
     }
 
   .layout-bt a:hover {
@@ -112,7 +117,7 @@ height: 100%;
   }
 
   .header a:hover {
-    background-color: #ddd;
+    background-color: #87A9DA;
     color: black;
   }
 
@@ -149,7 +154,8 @@ height: 420px;
 width: 400px;
 margin: 120px auto;
 padding: 20px;
-    text-align: center
+ text-align: center;
+    
   }
 
   .input {
@@ -160,8 +166,8 @@ width: 340px;
   border: solid white 4px;
   height: 400px;
   width: 400px;
-  margin: 120px auto; 
 padding: 20px;
+
 }
 
   .loggin {
@@ -180,17 +186,19 @@ background-image: url ("./pictures/grå.jpg");
 }
 
 body {
-background: url('./pictures/grå.jpg');
+background: white;
 background-size: cover;
 background-repeat: no-repeat;
 color: white;
 margin: 0 auto;
+font-family: 'Poppins', sans-serif;
 }
 
 .login_text{
   float: left;
   padding: 0 0 0 26px;
   margin: 0 auto;
+  
 } 
 
 .logginbtn {
@@ -199,8 +207,8 @@ background-size: 100% 100%;
 height: 40px;
 width: 170px;
 border: none;
-margin: 20px;
-float: left;
+display: inline-block;
+margin: 20px auto 20px auto;
 }
 
 .admin{
@@ -219,6 +227,7 @@ text-align: center
   margin:0 auto; 
 padding: 20px;
 text-align: center;
+box-shadow: 5px 5px;
 }
 
 .text{
@@ -230,14 +239,17 @@ text-decoration: none;
 }
 
 .div-button{
-  background:  white ;
-  background-size: 100% 100%;
-  height: 40px;
-  width: 150px;
-  border: none;
-  margin: 20px;
-text-decoration: none; 
-color: black
+  display: block;
+  width: 160px;
+  height: auto;
+  border: 2px solid white;
+  margin: 6px auto;
+background:black ;
+color: white;
+font-size: 20px;
+text-align: center;
+line-height: 50px;
+text-decoration: none;
 
 }
 
@@ -250,3 +262,96 @@ padding: 20px;
 text-align: center;
 }
 
+.listaobjekt{
+  border: solid white 4px;
+  height: 800x;
+  width: 400px;
+  margin:0 auto; 
+padding: 20px;
+text-align: center;
+
+}
+
+.objekt-container{
+  border: solid white 4px;
+  height: 800x;
+  width: 400px;
+  margin:0 auto; 
+padding: 20px;
+text-align: center;
+
+}
+
+.container-box{
+
+background: white; 
+margin-top: 50px;
+color:#343C44;
+box-shadow: 0px 0px 40px -5px rgba(0, 0, 0, 0.11);
+
+
+}
+.container-box h1{
+color: #E7992A;
+
+
+}
+.big{
+width: 800px;
+
+}
+.container-box-second{
+
+  background: white; 
+  margin-top: 50px;
+  color:#343C44;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+  
+  }
+  .container-box-second h1{
+  color: #E7992A;
+  
+  
+  }
+
+  .kontrollbox{
+    margin: 200px auto 0 auto;
+    text-align: center;
+    padding: 20px; 
+  }
+
+  .top-margin{
+    margin: 200px auto 0 auto;
+    width: 500px;
+    padding: 20px; 
+    text-align: center;
+  }
+  .submitbtn{
+border: none;
+background: #E7992A;
+padding: 10px;  
+margin: 20px;
+color: white;
+font-weight: bold;
+
+  }
+  .auto-height{
+height: auto;
+
+
+  }
+
+  .column{
+display:flex;
+flex-direction: column;
+align-items: center;
+
+
+
+  }
+  .desc{
+width: 340px;
+height: 150px;
+
+  }

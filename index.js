@@ -21,15 +21,7 @@ app.use('/static' , express.static('public'));
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-app.post('/home/loggin', async (request, response) => {
-const db = await connect();
-const collection = db.collection("users");
-const login = await collection.find({losenord: request.body.losenord, UserName: request.body.UserName}).toArray();
-if (login.length < 1 ) {
-response.set('Set-Cookie', 'admin=true;');
-response.redirect("/controlpanel");
-}
-});
+
 
 app.post('/controlpanel/visaobjekt/edit/:_id', async (request,  response) => {
     const edit = request.params.id; 
@@ -107,10 +99,10 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
         const loggin = await collection.find({epostadress: request.body.epostadress}).toArray();
 
 if (loggin[0].losenord === request.body.losenord ) {
-    response.set('Set-Cookie', 'password=true;');
+    response.set('Set-Cookie', 'admin=true;');
     response.redirect("/controlpanel/");
     } else {
-        response.render('/home/loggin', {layout:  "main", meddelande: 'fel lösenord'});
+        response.render('loggin', {layout:  "main", meddelande: 'fel lösenord'});
     }
    
     });

@@ -1,24 +1,25 @@
-<div class= "objekt">
-<div class ="skapaobjekt">
-<p>skapa objekt</p>
+<div class= "objekt container-box-second top-margin auto-height">
+<div class ="skapaobjekt auto-height">
+<h1> Objekt </h1>
 
 <form id="form" name="form" method="post" action="/portfolio/create" enctype="multipart/form-data"> 
-title <br />
-<textarea name="title1"></textarea> 
-ladda upp länkar:<br />
+<div class="column" >
+Title <br />
+<input class = "input" type="links" name="title1" id="länk" /> <br />
+Ladda upp länkar:<br />
 <input class = "input" type="links" name="länk" id="länk" /> <br />
-text : <br />
-<textarea name="content"></textarea> 
+Text : <br />
+<textarea class="desc" name="content"></textarea> 
 <br />
-ladda upp bilder <br />
+Ladda upp bilder <br />
 <input class = "input" type="file" name="bild" id="bild" /> <br />
 
 <br />
-<input type="submit" name="skicka" id="skicka" value="skapa objekt" />
+<input class="submitbtn" type="submit" name="skicka" id="skicka" value="Skapa objekt" />
 
 <br />
 </div>
-
+</div>
 
 
 </form>
