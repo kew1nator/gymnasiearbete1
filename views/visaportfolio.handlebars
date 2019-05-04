@@ -1,9 +1,12 @@
-<div class ="portfolio">
+<div class = "listaobjekt container-box-second auto-height big ">
+
 
 {{#each objekt}}
-<h2> {{title1}} </h2> 
-<h2>{{content}}</h2> 
-<h3> här nedanför finns det en länk till github där jag har laddat upp koden för hemsidan</h3> <br />
-<button onclick="window.location.href = '{{länknamn}}';">Click Here</button>
+<h1> {{title1}} </h1> 
+ <img class="bild" src  ="/static/images/{{bildnamn}} ">
+<p>{{content}}</p> 
+
+<a href="{{länknamn}}" class="submitbtn"  ><i class="fab fa-github"></i> GitHub</a>
+
 {{/each}}
 </div>

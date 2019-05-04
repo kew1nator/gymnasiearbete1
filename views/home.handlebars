@@ -3,8 +3,10 @@
     <div class ="startsida">
 {{#each objekt}}
 
-<div class="box">
-<a href="/portfolio/visa/{{_id}}"><img class="bild" src  ="/static/images/{{bildnamn}} "></a>
+<div class="box column">
+    <h2 class="title">{{title1}}</h2>
+    <img class="bild" src  ="/static/images/{{bildnamn}} ">
+<a class="submitbtn" href="/portfolio/visa/{{_id}}">Visa</a>
 </div>
 
 {{/each}}

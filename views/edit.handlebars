@@ -5,13 +5,19 @@
 <h1>Editera objekt</h1>
 <form id="form" name="form" method="post" action="/controlpanel/visaobjekt/edit/{{skapaobjekt._id}}"> 
 <div class="column">
-Ladda upp bilder
-<input type="file" value="{{skapaobjekt.bildnamn}}" name="bild" id="bild" /> <br />
+Title <br />
+<input class = "input" type="links" name="title1" id="länk" value="{{skapaobjekt.title1}}" /> <br />
 
+Text : <br />
+<textarea class="desc" name="content">{{skapaobjekt.content}}</textarea> 
+<br />
 Ladda upp länkar:<br />
 <input class = "input" type="links" value="{{skapaobjekt.länknamn}}" name="länk" id="länk" /> <br />
 
-<input class="submitbtn" type="submit" name="skicka" id="skicka" value="Skapa objekt" />
+Ladda upp bilder <br />
+<input class = "input submitbtn" type="file" name="bild" id="bild" /> <br />
+
+<input class="submitbtn" type="submit" name="skicka" id="skicka" value="Ändra objekt" />
 
 </div>
 </div>

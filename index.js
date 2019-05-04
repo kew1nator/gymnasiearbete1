@@ -23,7 +23,7 @@ app.set('view engine', 'handlebars');
 
 
 
-app.post('/controlpanel/visaobjekt/edit/:_id', async (request,  response) => {
+app.post('/controlpanel/visaobjekt/edit/:id', async (request,  response) => {
     const edit = request.params.id; 
     const db = await connect();
     const collection = db.collection('skapaobjekt');
@@ -49,7 +49,8 @@ app.post('/portfolio/create', upload.single('bild'), async  (request, response) 
     const db = await connect();
     const collection = db.collection('skapaobjekt');
     await collection.insertOne(skapaobjekt);
-    response.sendStatus(204); 
+    response.redirect("/controlpanel/listaobjekt")
+    
     });
 
     app.get('/controlpanel/registrera', (request, response) => {
@@ -68,7 +69,7 @@ app.post('/portfolio/create', upload.single('bild'), async  (request, response) 
         const db = await connect();
         const collection = await db.collection('användare');
         await collection.insertOne(registrera);
-        response.redirect("/controlpanel");
+        response.redirect("/home/loggin");
         }); 
 
 app.get('/controlpanel/skapaobjekt', (request, response) => {
@@ -182,7 +183,8 @@ const collection = db.collection("skapaobjekt");
 const skapaobjekt = await collection.find({_id: ObjectId(id)}).toArray();
 console.log(skapaobjekt);
 response.render('visaobjekt' , {
-   objekt: skapaobjekt[0]
+   objekt: skapaobjekt[0],
+   layout: "cp"
 })
 });
 
@@ -192,6 +194,7 @@ app.get('/controlpanel/listaobjekt', async (request, response) => {
        const listaobjekt = await collection.find().toArray();
        response.render('listaobjekt' , {
         objekt: listaobjekt,
+        layout: "cp"
        });
       
     });
