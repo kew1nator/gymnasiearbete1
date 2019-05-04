@@ -3,7 +3,7 @@
 <div class ="skapaobjekt container-box-second top-margin">
     
 <h1>Editera objekt</h1>
-<form id="form" name="form" method="post" action="/controlpanel/visaobjekt/edit/{{skapaobjekt._id}}"> 
+<form enctype="multipart/form-data" id="form" name="form" method="post" action="/controlpanel/visaobjekt/edit/{{skapaobjekt._id}}"> 
 <div class="column">
 Title <br />
 <input class = "input" type="links" name="title1" id="länk" value="{{skapaobjekt.title1}}" /> <br />

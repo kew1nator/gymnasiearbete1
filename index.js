@@ -23,15 +23,25 @@ app.set('view engine', 'handlebars');
 
 
 
-app.post('/controlpanel/visaobjekt/edit/:id', async (request,  response) => {
+app.post('/controlpanel/visaobjekt/edit/:id',upload.single('bild'), async (request,  response) => {
+    console.log(request.file)
+    const newobjekt =  {
+           
+            länknamn: request.body.länk,  
+            title1: request.body.title1,
+            content: request.body.content,
+            }
+            if(request.file){
+newobjekt.bildnamn = request.file.filename
+
+
+
+            }
     const edit = request.params.id; 
     const db = await connect();
     const collection = db.collection('skapaobjekt');
     await collection.findOneAndUpdate({ _id: ObjectId(edit)}, 
-        { $set: {
-            bildnamn: request.body.bild,
-            länknamn: request.body.länk,  
-            }
+        { $set: newobjekt
          } 
     );
     response.redirect("/controlpanel/listaobjekt");
@@ -138,7 +148,7 @@ app.get('/controlpanel/visaobjekt/tabort/:id', async (request, response) => {
     response.redirect("/controlpanel/listaobjekt");
 });
 
-app.get('/controlpanel/visaobjekt/edit/:id', async (request, response) => {
+app.get('/controlpanel/visaobjekt/edit/:id',  async (request, response) => {
     const edit = request.params.id; 
     const db = await connect();
     const collection = db.collection('skapaobjekt');
