@@ -80,7 +80,7 @@ app.post('/portfolio/create', upload.single('bild'), async  (request, response) 
 
         app.post('/controlpanel/registrera', async (request, response) => {
             const saltRounds = 10;
-            const myPlaintextPassword = request.body.password;
+            const myPlaintextPassword = request.body.losenord;
           
             bcrypt.genSalt(saltRounds, function(err, salt) {
               bcrypt.hash(myPlaintextPassword, salt, async function(err, hash) {
@@ -132,7 +132,7 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
 
         const loggin = await collection.find({epostadress: request.body.epostadress}).toArray();
 
-        bcrypt.compare(request.body.losenord, loggin[0].password, function(
+        bcrypt.compare(request.body.losenord, loggin[0].losenord, function(
            err,
            match 
         ){
