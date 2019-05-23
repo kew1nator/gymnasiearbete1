@@ -67,7 +67,7 @@ app.post('/portfolio/create', upload.single('bild'), async  (request, response) 
     
     });
 
-app.get('/controlpanel/registrera', (request, response) => {
+    app.get('/controlpanel/registrera', (request, response) => {
         if(request.headers.cookie) {
             response.render('registrera', {layout: "cp"});
             
@@ -78,17 +78,19 @@ app.get('/controlpanel/registrera', (request, response) => {
         response.set()
         });
 
-app.post('/controlpanel/registrera', async (request, response) => {
-        const saltRounds = 10;
-        const myPlaintextPassword = request.body.password;
-
-        bcrypt.genSalt(saltRounds, function(err, salt) {
-          bcrypt.hash(myPlaintextPassword, salt, async function(err, hash) {
+        app.post('/controlpanel/registrera', async (request, response) => {
+            const saltRounds = 10;
+            const myPlaintextPassword = request.body.password;
+          
+            bcrypt.genSalt(saltRounds, function(err, salt) {
+              bcrypt.hash(myPlaintextPassword, salt, async function(err, hash) {
             const registrera = {
-              UserName: request.body.UserName,
-              epostadress: request.body.epost ,
-              losenord: hash,
-                }; 
+                UserName: request.body.UserName,
+                epostadress: request.body.epost ,
+                losenord: hash,
+            }; 
+
+    
         const db = await connect();
         const collection = await db.collection('användare');
         await collection.insertOne(registrera);
@@ -96,8 +98,7 @@ app.post('/controlpanel/registrera', async (request, response) => {
         }); 
     });
 });
-
-
+        
 app.get('/controlpanel/skapaobjekt', (request, response) => {
     if(request.headers.cookie) {
         response.render('skapaobjekt', {layout: "cp"});
@@ -131,13 +132,17 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
 
         const loggin = await collection.find({epostadress: request.body.epostadress}).toArray();
 
-if (loggin[0].losenord === request.body.losenord ) {
-    response.cookie('admin', 'true');
-    response.redirect("/controlpanel/");
-    } else {
-        response.render('loggin', {layout:  "main", meddelande: 'fel lösenord'});
-    }
-   
+        bcrypt.compare(request.body.losenord, loggin[0].password, function(
+           err,
+           match 
+        ){
+            if (loggin[0].losenord === request.body.losenord ) {
+                response.cookie('admin', 'true');
+                response.redirect("/controlpanel/");
+                } else {
+                    response.render('loggin', {layout:  "main", meddelande: 'fel lösenord'});
+                }
+        });
     });
     
     app.get('/home/loggin', (request, response) => {
