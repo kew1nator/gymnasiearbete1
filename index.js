@@ -136,7 +136,7 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
            err,
            match 
         ){
-            if (loggin[0].losenord === request.body.losenord ) {
+            if (match) {
                 response.cookie('admin', 'true');
                 response.redirect("/controlpanel/");
                 } else {
