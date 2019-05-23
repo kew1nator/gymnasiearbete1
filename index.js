@@ -3,6 +3,10 @@ const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser'); 
 const app = express();
 const connect = require('./models/connect');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
 app.use(bodyParser.urlencoded());
 const ObjectId = require('mongodb').ObjectId;
 const formidable = require('formidable');
@@ -63,27 +67,45 @@ app.post('/portfolio/create', upload.single('bild'), async  (request, response) 
     
     });
 
-    app.get('/controlpanel/registrera', (request, response) => {
-        response.render('registrera', {layout: "cp"});
+app.get('/controlpanel/registrera', (request, response) => {
+        if(request.headers.cookie) {
+            response.render('registrera', {layout: "cp"});
+            
+           }else {
+               response.redirect('/home/loggin')
+           }
+       
         response.set()
         });
 
-        app.post('/controlpanel/registrera', async (request, response) => {
-            const registrera = {
-                UserName: request.body.UserName,
-                epostadress: request.body.epost ,
-                losenord: request.body.losenord,
-            }; 
+app.post('/controlpanel/registrera', async (request, response) => {
+        const saltRounds = 10;
+        const myPlaintextPassword = request.body.password;
 
-    
+        bcrypt.genSalt(saltRounds, function(err, salt) {
+          bcrypt.hash(myPlaintextPassword, salt, async function(err, hash) {
+            const registrera = {
+              UserName: request.body.UserName,
+              epostadress: request.body.epost ,
+              losenord: hash,
+                }; 
         const db = await connect();
         const collection = await db.collection('användare');
         await collection.insertOne(registrera);
         response.redirect("/home/loggin");
         }); 
+    });
+});
+
 
 app.get('/controlpanel/skapaobjekt', (request, response) => {
-    response.render('skapaobjekt', {layout: "cp"});
+    if(request.headers.cookie) {
+        response.render('skapaobjekt', {layout: "cp"});
+        
+       }else {
+           response.redirect('/home/loggin')
+       }
+    
     });
 
     app.post('/controlpanel/skapaobjekt', async (request, response) => {
@@ -110,7 +132,7 @@ app.get('/controlpanel/skapaobjekt', (request, response) => {
         const loggin = await collection.find({epostadress: request.body.epostadress}).toArray();
 
 if (loggin[0].losenord === request.body.losenord ) {
-    response.set('Set-Cookie', 'admin=true;');
+    response.cookie('admin', 'true');
     response.redirect("/controlpanel/");
     } else {
         response.render('loggin', {layout:  "main", meddelande: 'fel lösenord'});
@@ -141,6 +163,7 @@ app.get('/controlpanel/admin', (request, response) => {
 
 
 app.get('/controlpanel/visaobjekt/tabort/:id', async (request, response) => {
+    
     const tabort = request.params.id; 
     const db = await connect();
     const collection = db.collection('skapaobjekt');
@@ -163,7 +186,12 @@ app.get('/ommig', (request, response) => {
 });
 
 app.get('/controlpanel', (request, response) => {
+   if(request.headers.cookie) {
     response.render('controlpanel', {layout: "cp"});
+    
+   }else {
+       response.redirect('/home/loggin')
+   }
 });
 
 app.get('/portfolio/visa/:id', async (request, response) => {
@@ -182,6 +210,14 @@ app.get('/controlpanel/visaobjekt', (request, response) => {
 
 app.get('/controlpanel/edit', (request, response) => {
     response.render('edit', {layout: "cp"});
+});
+
+
+app.get('/controlpanel/loggout', (request, response) => {
+   response.set(
+    'Set-Cookie','admin=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
+   );
+    response.redirect('/' ); 
 });
 
 
@@ -209,5 +245,7 @@ app.get('/controlpanel/listaobjekt', async (request, response) => {
       
     });
 
+    
+
   
-app.listen(1111, () => console.log('application running on port 1111'));
+app.listen(5054, () => console.log('application running on port 5054'));
